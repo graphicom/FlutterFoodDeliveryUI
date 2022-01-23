@@ -17,7 +17,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
     return Center(
       child: Stack(
         alignment: Alignment.center,
-        children: <Widget>[
+        children: [
           Container(
             height: 175.0,
             width: 175.0,
@@ -103,9 +103,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
               Hero(
                 tag: widget.restaurant.imageUrl,
                 child: Image(
-                  image: AssetImage(widget.restaurant.imageUrl),
                   height: 220.0,
                   width: MediaQuery.of(context).size.width,
+                  image: AssetImage(widget.restaurant.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -115,20 +115,20 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.pop(context),
                       icon: Icon(Icons.arrow_back_ios),
                       color: Colors.white,
                       iconSize: 30.0,
+                      onPressed: () => Navigator.pop(context),
                     ),
                     IconButton(
-                      onPressed: () {},
                       icon: Icon(Icons.favorite),
                       color: Theme.of(context).primaryColor,
                       iconSize: 35.0,
-                    )
+                      onPressed: () {},
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           Padding(
@@ -142,82 +142,82 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                     Text(
                       widget.restaurant.name,
                       style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     Text(
-                      "0.2 miles away",
-                      style: TextStyle(fontSize: 18.0),
-                    )
+                      '0.2 miles away',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
                   ],
                 ),
                 RatingStar(widget.restaurant.rating),
-                SizedBox(
-                  height: 6.0,
-                ),
+                SizedBox(height: 6.0),
                 Text(
                   widget.restaurant.address,
                   style: TextStyle(fontSize: 18.0),
                 ),
-                SizedBox(
-                  height: 6.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FlatButton(
-                        onPressed: () {},
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Text(
-                          "Reviews",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                        )),
-                    FlatButton(
-                        onPressed: () {},
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Text(
-                          "Contact",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                        )),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Center(
-                  child: Text(
-                    "Menu",
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height/3,
-                  child: GridView.builder(
-                      // shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                      ),
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          color: Colors.amber,
-                          child: Center(child: Text('$index')),
-                        );
-                      }
-                  ),
-                ),
               ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FlatButton(
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Text(
+                  'Reviews',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+                onPressed: () {},
+              ),
+              FlatButton(
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Text(
+                  'Contact',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          SizedBox(height: 10.0),
+          Center(
+            child: Text(
+              'Menu',
+              style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ),
+          SizedBox(height: 10.0),
+          Expanded(
+            child: GridView.count(
+              padding: EdgeInsets.all(10.0),
+              crossAxisCount: 2,
+              children: List.generate(widget.restaurant.menu.length, (index) {
+                Food food = widget.restaurant.menu[index];
+                return _buildMenuItem(food);
+              }),
             ),
           )
         ],
@@ -225,3 +225,48 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
     );
   }
 }
+
+
+// class RestaurantScreen extends StatefulWidget {
+//   final Restaurant restaurant;
+//
+//   RestaurantScreen({required this.restaurant});
+//
+//   @override
+//   _RestaurantScreenState createState() => _RestaurantScreenState();
+// }
+// class _RestaurantScreenState extends State<RestaurantScreen> {
+//   _buildMenuItem() {
+//     return Container(
+//       height: MediaQuery.of(context).size.height - 480,
+//       child: GridView.builder(
+//           // padding: EdgeInsets.all(10.0),
+//           // shrinkWrap: true,
+//           gridDelegate:
+//               const SliverGridDelegateWithFixedCrossAxisCount(
+//             crossAxisCount: 2,
+//           ),
+//           itemCount: widget.restaurant.menu.length,
+//           itemBuilder: (BuildContext context, int index) {
+//             return Card(
+//               // color: Colors.amber,
+//               child: Stack(
+//                 children: [
+//                   Container(
+//                     width: 175.0,
+//                     height: 175.0,
+//                     decoration: BoxDecoration(
+//                       image: DecorationImage(
+//                         image: AssetImage(widget.restaurant.menu[index].imageUrl),
+//                         fit: BoxFit.cover
+//                       ),
+//                       borderRadius: BorderRadius.circular(15.0)
+//                     ),
+//                   )
+//                 ],
+//               ),
+//             );
+//           }),
+//     );
+//   }
+//
