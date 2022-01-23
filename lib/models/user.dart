@@ -1,13 +1,13 @@
 import 'order.dart';
 
 class User {
-  final String? name;
-  final List<Order>? orders;
-  final List<Order>? cart;
+  final String name;
+  final List<Order> orders;
+  final List<Order> cart;
 
   User({
-    this.name,
-    this.orders,
-    this.cart,
+    required this.name,
+    required this.orders,
+    required this.cart,
   });
 }

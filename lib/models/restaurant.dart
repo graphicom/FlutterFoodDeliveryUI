@@ -1,17 +1,17 @@
 import 'food.dart';
 
 class Restaurant {
-  final String? imageUrl;
-  final String? name;
-  final String? address;
-  final int? rating;
-  final List<Food>? menu;
+  final String imageUrl;
+  final String name;
+  final String address;
+  final int rating;
+  final List<Food> menu;
 
   Restaurant({
-    this.imageUrl,
-    this.name,
-    this.address,
-    this.rating,
-    this.menu,
+    required this.imageUrl,
+    required this.name,
+    required this.address,
+    required this.rating,
+    required this.menu,
   });
 }

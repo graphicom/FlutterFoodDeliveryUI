@@ -22,7 +22,7 @@ class RecentOrders extends StatelessWidget {
                   child: Image(
                       width: 100.0,
                       height: 100.0,
-                      image: AssetImage(order.food?.imageUrl ?? ""),
+                      image: AssetImage(order.food.imageUrl),
                       fit: BoxFit.cover),
                 ),
                 Expanded(
@@ -33,7 +33,7 @@ class RecentOrders extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          order.food?.name ?? "",
+                          order.food.name,
                           style: TextStyle(
                               fontSize: 17.0, fontWeight: FontWeight.bold),
                           overflow: TextOverflow.ellipsis,
@@ -42,7 +42,7 @@ class RecentOrders extends StatelessWidget {
                           height: 4.0,
                         ),
                         Text(
-                          order.restaurant?.name ?? "",
+                          order.restaurant.name,
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,
@@ -51,7 +51,7 @@ class RecentOrders extends StatelessWidget {
                           height: 4.0,
                         ),
                         Text(
-                          order.date.toString(),
+                          order.date,
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w600),
                           overflow: TextOverflow.ellipsis,
@@ -87,7 +87,7 @@ class RecentOrders extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               'Recent Orders',
               style: TextStyle(
@@ -103,10 +103,10 @@ class RecentOrders extends StatelessWidget {
               padding: EdgeInsets.only(left: 10.0),
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                Order order = currentUser.orders![index];
+                Order order = currentUser.orders[index];
                 return _buildRecentOrder(context, order);
               },
-              itemCount: currentUser.orders?.length ?? 0,
+              itemCount: currentUser.orders.length,
             ),
           ),
         ]);
